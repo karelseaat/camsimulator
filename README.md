@@ -1,47 +1,43 @@
- # GrblSimulator - A Graphical Interface for GRBL Simulation
+# GrblSimulator
 
-GrblSimulator is a user-friendly graphical interface designed to simulate and visualize the operation of GRBL, an open-source CNC machine controller. The application allows users to manipulate the GRBL's position, speed, limits, and more in a visual, interactive manner, facilitating easier understanding and experimentation with the software.
+I built this to debug GRBL G-code without a machine attached—noSerial, no panic when you typo `G0 X1000`.
 
-## Features
+It’s a lightweight GUI simulator that runs GRBL’s state machine and visualizes motion in real time.
 
-- Visual representation of the simulated GRBL's current position and path
-- Interactive control over the X, Y, and Z axes, including limit setting and movement
-- Configurable feed rate for smooth motion control
-- Real-time feedback on the current position, limits hit, and working state
-- Alarm handling to prevent exceeding the machine's limits
-- Built-in GRBL commands support
-- Integrated status reporting for connected devices
+## What it does
 
-## Installation
+- Renders X/Y/Z toolpath as you move or send G-code
+- Interactive axis controls: drag the tool, set soft limits, tweak feed rate
+- Tracks position, alarm states, and work coordinates live
+- Parses GRBL commands (including `$`, `~`, `!`, etc.) and shows parser responses
+- Reports machine status (`<Idle|WPos:...>`) exactly like the real thing
 
-To use GrblSimulator, follow these steps:
+## Requirements
 
-1. Clone the repository: `git clone https://github.com/yourusername/GrblSimulator.git`
-2. Navigate to the project directory: `cd GrblSimulator`
-3. Run the application using Python: `python GrblSimulator.py`
+- Python 3.6+  
+- No external dependencies (uses only stdlib: `tkinter`, `textwrap`, `re`)
 
-## Usage
+## Install & run
 
-Upon launching, a graphical window will appear displaying the simulated GRBL's current position and limits on the X, Y, and Z axes. You can interact with the simulator by:
+```bash
+git clone https://github.com/yourusername/GrblSimulator.git
+cd GrblSimulator
+python GrblSimulator.py
+```
 
-- Clicking and dragging the tool icon to move the GRBL along any axis
-- Adjusting the limits of each axis using the limit buttons (min and max values)
-- Changing the feed rate using the Feed Rate input field
+## Usage tips
 
-In addition, you can send G-code commands to the simulator by entering them into the Command Input field and pressing Enter. The results will be displayed in the Output area.
-
-## Dependencies
-
-GrblSimulator requires Python 3.x to run. No additional dependencies are needed.
+- Drag the red square to manually jog the tool. Click the arrows to step by 1mm.
+- Hit **Enter** in the command box to send G-code. The output panel shows GRBL’s response—including `$` settings and alarm codes.
+- Set soft limits with the **Min/Max** fields. Exceed them and GRBL will alarm (you’ll see `Alarm:2` in output).
+- Feed rate (F) is applied to all `G0`/`G1` moves—no interpolation, just linear scaling.
 
 ## Contributing
 
-We welcome contributions to improve GrblSimulator! If you find any issues or have suggestions for new features, please open an issue on GitHub. Pull requests are also appreciated.
+Bugs? Improvements? Hit the issues or PRs. I’ll mostly care about:
+- Correct GRBL protocol behavior (look at grbl/grbl source)
+- Keep it runnable on stock Python (no `pip install` required)
 
 ## License
 
-GrblSimulator is released under the MIT License. See LICENSE for details.
-
-## Credits
-
-This project was created by [Your Name] as a tool to facilitate understanding and experimentation with GRBL simulation. Special thanks to the GRBL community for their open-source efforts that made this possible.
+MIT — see `LICENSE`.
