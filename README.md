@@ -41,3 +41,7 @@ Bugs? Improvements? Hit the issues or PRs. I’ll mostly care about:
 ## License
 
 MIT — see `LICENSE`.
+
+## More from Karelseaat
+
+For more projects and experiments, visit my GitHub Pages site: [karelseaat.github.io](https://karelseaat.github.io/)
